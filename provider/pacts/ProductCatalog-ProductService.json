@@ -7,6 +7,128 @@
       "description": "get all products",
       "providerStates": [
         {
+          "name": "no products exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/products"
+      },
+      "response": {
+        "body": {
+          "products": [
+
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "get product with ID 10",
+      "providerStates": [
+        {
+          "name": "product id 10 exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/products/10"
+      },
+      "response": {
+        "body": {
+          "id": 10,
+          "name": "::name::",
+          "type": "CREDIT_CARD",
+          "version": "::version::"
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.version": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "get product with ID 13",
+      "providerStates": [
+        {
+          "name": "product id 13 does not exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/products/13"
+      },
+      "response": {
+        "status": 404
+      }
+    },
+    {
+      "description": "get all products",
+      "providerStates": [
+        {
           "name": "products exist"
         }
       ],

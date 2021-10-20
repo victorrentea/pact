@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @ExtendWith(PactConsumerTestExt.class)
@@ -55,5 +57,85 @@ public class ProductServiceClientPactTest {
       assertThat(response.getProducts())
           .hasSize(2)
           .first().isEqualTo(new Product(9L, "::name::", "CREDIT_CARD", null));
+   }
+
+   @Pact(consumer = "ProductCatalog")
+   public RequestResponsePact allProducts_zero(PactDslWithProvider builder) {
+      return builder
+          .given("no products exist")
+          .uponReceiving("get all products")
+          .path("/products")
+          .willRespondWith()
+          .status(200)
+          .body(new PactDslJsonBody()
+              .array("products")
+              .closeArray()
+          )
+          .toPact();
+   }
+
+   @Test
+   @PactTestFor(pactMethod = "allProducts_zero", port="9999")
+   void testAllProducts_noneReturned(MockServer mockServer) throws IOException {
+      productServiceClient.baseUrl = mockServer.getUrl();
+      ProductServiceResponse response = productServiceClient.fetchAllProducts();
+
+      System.out.println(response.getProducts());
+
+      assertThat(response.getProducts())
+          .isEmpty();
+   }
+
+   // ==============
+
+
+   @Pact(consumer = "ProductCatalog")
+   public RequestResponsePact pact_productById(PactDslWithProvider builder) {
+      return builder
+          .given("product id 10 exist")
+          .uponReceiving("get product with ID 10")
+          .path("/products/10")
+          .willRespondWith()
+          .status(200)
+          .body(new PactDslJsonBody()
+              .integerType("id", 10L)
+              .stringType("name", "::name::")
+              .stringType("type", "CREDIT_CARD")
+              .stringType("version", "::version::")
+          )
+          .toPact();
+   }
+
+   @Test
+   @PactTestFor(pactMethod = "pact_productById", port="9999")
+   void testProductById(MockServer mockServer) throws IOException {
+      productServiceClient.baseUrl = mockServer.getUrl();
+      Product product = productServiceClient.fetchProductById(10L);
+
+      System.out.println(product);
+
+      assertThat(product).isEqualTo(new Product(10L, "::name::", "CREDIT_CARD", "::version::"));
+   }
+
+   @Pact(consumer = "ProductCatalog")
+   public RequestResponsePact productById404(PactDslWithProvider builder) {
+      return builder
+          .given("product id 13 does not exist")
+          .uponReceiving("get product with ID 13")
+          .path("/products/13")
+          .willRespondWith()
+          .status(404)
+          .toPact();
+   }
+
+   @Test
+   @PactTestFor(pactMethod = "productById404", port="9999")
+   void testProductByIdNotFound(MockServer mockServer) throws IOException {
+      productServiceClient.baseUrl = mockServer.getUrl();
+
+      assertThatThrownBy(() -> productServiceClient.fetchProductById(13L))
+          .isInstanceOf(HttpClientErrorException.class)
+          .hasMessageContaining("404");
+
    }
 }

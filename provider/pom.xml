@@ -34,19 +34,33 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>3.9.1</version>
+        </dependency>
+        <dependency>
+            <!-- autoconfigures the p6spy jdbc proxying -->
+            <groupId>com.github.gavlyukovskiy</groupId>
+            <artifactId>p6spy-spring-boot-starter</artifactId>
+            <version>1.7.1</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <!--pact-->
-
         <dependency>
             <groupId>au.com.dius.pact.provider</groupId>
             <artifactId>junit5spring</artifactId>
             <version>4.1.17</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 

@@ -1,27 +1,21 @@
 package victor.training.pact.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @SpringBootApplication
-public class ProviderApp implements CommandLineRunner {
+public class ProviderApp {
    public static void main(String[] args) {
        SpringApplication.run(ProviderApp.class, args);
-   }
-   @Override
-   public void run(String... args) {
-      productRepository.save(new Product("Headphones","CREDIT_CARD", "v1", "code1"));
-      productRepository.save(new Product("Microphone","CREDIT_CARD", "v1", "code2"));
-      productRepository.save(new Product("Monitor","CREDIT_CARD", "v1", "code3"));
    }
 
    @Autowired
@@ -32,8 +26,12 @@ public class ProviderApp implements CommandLineRunner {
       return new ProductsResponse((List<Product>) productRepository.findAll());
    }
 
-   @GetMapping("/product/{id}")
-   public Optional<Product> productById(@PathVariable("id") Long id) {
-      return productRepository.findById(id);
+   @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "not found")
+   public static class NotFoundException extends RuntimeException { }
+
+
+   @GetMapping("/products/{id}") // TODO introduce typo
+   public Product productById(@PathVariable("id") Long id) {
+      return productRepository.findById(id).orElseThrow(NotFoundException::new);
    }
 }
