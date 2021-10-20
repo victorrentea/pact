@@ -49,12 +49,22 @@
             <version>4.2.14</version>
             <scope>test</scope>
         </dependency>
-       <!-- <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>4.9.2</version>
-        </dependency>-->
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- Publish to PACT Broker -->
+            <plugin>
+                <groupId>au.com.dius.pact.provider</groupId>
+                <artifactId>maven</artifactId>
+                <version>4.1.17</version>
+                <configuration>
+                    <pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
+                    <pactBrokerUsername>pact_workshop</pactBrokerUsername>
+                    <pactBrokerPassword>pact_workshop</pactBrokerPassword>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
