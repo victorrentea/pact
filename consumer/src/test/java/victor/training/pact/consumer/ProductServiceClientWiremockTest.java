@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith({WiremockResolver.class, WiremockUriResolver.class})
 @SpringBootTest
-public class ProductServiceClientTest {
+public class ProductServiceClientWiremockTest {
 
    @Autowired
    ProductServiceClient productServiceClient;
