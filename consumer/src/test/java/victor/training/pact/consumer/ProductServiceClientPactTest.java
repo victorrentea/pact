@@ -54,4 +54,32 @@ public class ProductServiceClientPactTest {
           .extracting("id").containsExactlyInAnyOrder(9L, 10L);
    }
 
+   @Pact(consumer = "ProductCatalog") // eu
+   public RequestResponsePact fetchAProduct(PactDslWithProvider builder) {
+      return builder
+          .given("product with id 10 exists")
+          .uponReceiving("get product id 10")
+          .path("/product/10")
+          .willRespondWith()
+          .status(200)
+          .body(new PactDslJsonBody()
+                 .integerType("id", 10L)
+                 .stringType("name", "::name::")
+                 .stringType("type", "CREDIT_CARD")
+                 .stringType("version", "v1")
+                  )
+          .toPact();
+   }
+
+   // Consumer-Driven Contract Testing
+   @Test
+   @PactTestFor(pactMethod = "fetchAProduct") // arbitrary name
+   void getFetchOneProduct(MockServer mockServer) {
+      productServiceClient.baseUrl = mockServer.getUrl();
+
+      Product response = productServiceClient.fetchProductById(10L);
+
+      assertThat(response).isEqualTo(new Product(10L, "::name::", "CREDIT_CARD", "v1"));
+   }
+
 }

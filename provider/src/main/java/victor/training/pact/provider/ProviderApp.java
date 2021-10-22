@@ -30,7 +30,7 @@ public class ProviderApp {
    public static class NotFoundException extends RuntimeException { }
 
 
-   @GetMapping("/product/{id}") // TODO introduce typo
+   @GetMapping("/products/{id}") // TODO introduce typo
    public Product productById(@PathVariable("id") Long id) {
       return productRepository.findById(id).orElseThrow(NotFoundException::new);
    }
