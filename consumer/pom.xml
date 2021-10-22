@@ -43,12 +43,12 @@
         </dependency>
 
         <!-- pact -->
-      <!--  <dependency>
+        <dependency>
         <groupId>au.com.dius.pact.consumer</groupId>
         <artifactId>junit5</artifactId>
         <version>4.2.14</version>
         <scope>test</scope>
-    </dependency>-->
+    </dependency>
     </dependencies>
 
     <build>

@@ -54,12 +54,12 @@
             <scope>test</scope>
         </dependency>
         <!--pact-->
-       <!-- <dependency>
+        <dependency>
             <groupId>au.com.dius.pact.provider</groupId>
             <artifactId>junit5spring</artifactId>
             <version>4.2.14</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
 
