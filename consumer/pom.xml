@@ -43,18 +43,18 @@
         </dependency>
 
         <!-- pact -->
-        <dependency>
-            <groupId>au.com.dius.pact.consumer</groupId>
-            <artifactId>junit5</artifactId>
-            <version>4.2.14</version>
-            <scope>test</scope>
-        </dependency>
+      <!--  <dependency>
+        <groupId>au.com.dius.pact.consumer</groupId>
+        <artifactId>junit5</artifactId>
+        <version>4.2.14</version>
+        <scope>test</scope>
+    </dependency>-->
     </dependencies>
 
     <build>
         <plugins>
             <!-- Publish to PACT Broker -->
-            <plugin>
+           <!-- <plugin>
                 <groupId>au.com.dius.pact.provider</groupId>
                 <artifactId>maven</artifactId>
                 <version>4.1.17</version>
@@ -63,7 +63,7 @@
                     <pactBrokerUsername>pact_workshop</pactBrokerUsername>
                     <pactBrokerPassword>pact_workshop</pactBrokerPassword>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

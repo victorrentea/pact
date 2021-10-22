@@ -57,7 +57,7 @@ public class ProductServiceClientWiremockTest {
    @Test
    void getProductById(@Wiremock WireMockServer server, @WiremockUri String uri) {
       productServiceClient.baseUrl = uri;
-      server.stubFor(get(urlPathEqualTo("/products/10"))
+      server.stubFor(get(urlPathEqualTo("/product/10"))
           .willReturn(aResponse()
               .withStatus(200)
               .withHeader("Content-Type", "application/json")

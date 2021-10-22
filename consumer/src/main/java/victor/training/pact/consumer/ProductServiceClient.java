@@ -18,6 +18,6 @@ public class ProductServiceClient {
    }
 
    public Product fetchProductById(long id) {
-      return restTemplate.getForObject(baseUrl + "/products/" + id, Product.class);
+      return restTemplate.getForObject(baseUrl + "/product/" + id, Product.class);
    }
 }
