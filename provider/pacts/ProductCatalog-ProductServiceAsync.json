@@ -1,0 +1,47 @@
+{
+  "consumer": {
+    "name": "ProductCatalog"
+  },
+  "messages": [
+    {
+      "contents": {
+        "testParam1": "value1",
+        "testParam2": "value2"
+      },
+      "description": "a test message",
+      "matchingRules": {
+        "metadata": {
+          "destination": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "\\w+\\d+"
+              }
+            ]
+          }
+        }
+      },
+      "metaData": {
+        "contentType": "application/json",
+        "destination": "X001"
+      },
+      "providerStates": [
+        {
+          "name": "SomeProviderState"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.2.14"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "ProductServiceAsync"
+  }
+}

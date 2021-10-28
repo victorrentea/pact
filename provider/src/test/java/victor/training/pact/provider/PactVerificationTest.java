@@ -34,6 +34,8 @@ public class PactVerificationTest {
       context.setTarget(new HttpTestTarget("localhost", port));
    }
 
+
+
    @TestTemplate
    @ExtendWith(PactVerificationInvocationContextProvider.class)
    void test(PactVerificationContext context) {
