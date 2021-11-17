@@ -19,8 +19,9 @@
     </properties>
 
     <modules>
-        <module>consumer</module>
-        <module>provider</module>        
+        <module>catalog</module>
+        <module>product</module>
+        <module>order-history</module>
     </modules>
 	
 	<dependencyManagement>
