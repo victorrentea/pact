@@ -1,0 +1,57 @@
+{
+  "consumer": {
+    "name": "ProductCatalog"
+  },
+  "messages": [
+    {
+      "contents": {
+        "productId": 10,
+        "productName": "::name::"
+      },
+      "description": "when product id 10 changed",
+      "matchingRules": {
+        "body": {
+          "$.productId": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "integer"
+              }
+            ]
+          }
+        },
+        "metadata": {
+          "destination": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "regex",
+                "regex": "\\w+\\d+"
+              }
+            ]
+          }
+        }
+      },
+      "metaData": {
+        "contentType": "application/json",
+        "destination": "X001"
+      },
+      "providerStates": [
+        {
+          "name": "product id 10 exists"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.2.14"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "ProductServiceAsync"
+  }
+}
