@@ -8,8 +8,7 @@ import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import au.com.dius.pact.provider.junitsupport.IgnoreMissingStateChange;
 import au.com.dius.pact.provider.junitsupport.Provider;
-import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
-import au.com.dius.pact.provider.junitsupport.loader.PactBrokerAuth;
+import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +29,8 @@ import static org.mockito.Mockito.*;
 @IgnoreMissingStateChange
 @SpringBootTest
 
-//@PactFolder("pacts")
-@PactBroker(url="http://localhost:9292",  authentication = @PactBrokerAuth(username = "pact_workshop", password = "pact_workshop"))
+@PactFolder("pacts")
+//@PactBroker(url="http://localhost:9292",  authentication = @PactBrokerAuth(username = "pact_workshop", password = "pact_workshop"))
 public class ProductAsync_PactVerificationTest {
 
   @TestTemplate
