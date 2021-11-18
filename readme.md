@@ -18,3 +18,7 @@ mvnw verify -Dpact.verifier.publishResults=true -Dpact.provider.version=1.0-SNAP
 [WIP] take broker conn details from command line
 
 
+## Quick setup:
+1. Start Broker: docker-compose.yaml
+2. Run run-all.bat
+3. Navigate to Pact broker http://localhost:9292/   (user/pass: pact_workshop / pact_workshop)
