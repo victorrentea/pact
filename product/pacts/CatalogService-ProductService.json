@@ -1,0 +1,88 @@
+{
+  "consumer": {
+    "name": "CatalogService"
+  },
+  "interactions": [
+    {
+      "description": "get all products",
+      "providerStates": [
+        {
+          "name": "products exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/products"
+      },
+      "response": {
+        "body": {
+          "products": [
+            {
+              "id": 9,
+              "type": "CREDIT_CARD"
+            },
+            {
+              "id": 10,
+              "type": "CREDIT_CARD"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$.products": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.products[*].id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.products[*].type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.2.14"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "ProductService"
+  }
+}

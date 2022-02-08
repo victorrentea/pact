@@ -20,7 +20,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Provider("ProductService")
 @IgnoreMissingStateChange
-
 //@PactFolder("pacts")
 @PactBroker(url="http://localhost:9292",  authentication = @PactBrokerAuth(username = "pact_workshop", password = "pact_workshop"))
 public class Product_PactVerificationTest {
@@ -48,14 +47,14 @@ public class Product_PactVerificationTest {
       productRepository.save(new Product(2L, "Microphone","CREDIT_CARD", "v1", "code2", 12L));
    }
 
-   @State("no products exist")
-   void noProductsExist() {
-      productRepository.deleteAll();
-   }
-
-   @State("product id 10 exists")
-   void insertProduct10() {
-      productRepository.save(new Product(10L, "Headphones", "CREDIT_CARD", "v1", "code1", 11L));
-   }
+//   @State("no products exist")
+//   void noProductsExist() {
+//      productRepository.deleteAll();
+//   }
+//
+//   @State("product id 10 exists")
+//   void insertProduct10() {
+//      productRepository.save(new Product(10L, "Headphones", "CREDIT_CARD", "v1", "code1", 11L));
+//   }
 
 }

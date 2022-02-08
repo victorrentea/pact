@@ -1,5 +1,6 @@
 package victor.training.pact.provider;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -71,6 +72,7 @@ class Product {
    private String type;
    private String version;
    private String code;
+   @JsonProperty("supplier")
    private Long supplierId;// TODO remove
 }
 

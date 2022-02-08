@@ -52,6 +52,7 @@ class Product {
    private String name;
    private String type;
    private String version;
+   private Long supplier;
 }
 
 @Data

@@ -74,6 +74,7 @@
                     <pactBrokerUrl>http://localhost:9292</pactBrokerUrl>
                     <pactBrokerUsername>pact_workshop</pactBrokerUsername>
                     <pactBrokerPassword>pact_workshop</pactBrokerPassword>
+
                 </configuration>
             </plugin>
         </plugins>

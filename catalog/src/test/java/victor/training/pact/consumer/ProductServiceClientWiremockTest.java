@@ -50,7 +50,9 @@ public class ProductServiceClientWiremockTest {
                   .withHeader("Content-Type", "application/json"))
       );
 
+      // WHEN!!
       List<Product> response = productServiceClient.fetchAllProducts();
+
       assertThat(response)
           .hasSize(2)
           .extracting("id").containsExactlyInAnyOrder(9L, 10L);
@@ -75,7 +77,7 @@ public class ProductServiceClientWiremockTest {
       );
 
       Product product = productServiceClient.fetchProductById(10);
-      assertThat(product).isEqualTo(new Product(10L, "28 Degrees", "CREDIT_CARD", "v1"));
+      assertThat(product).isEqualTo(new Product(10L, "28 Degrees", "CREDIT_CARD", "v1", 1L));
    }
 
 
